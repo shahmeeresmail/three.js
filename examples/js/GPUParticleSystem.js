@@ -147,9 +147,9 @@ THREE.GPUParticleSystem = function(options) {
 			'}',
 
 			'if( timeElapsed > 0. ) {',
-			'gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );',
+			'gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( newPosition, 1.0 );',
 			'} else {',
-			'gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );',
+			'gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );',
 			'lifeLeft = 0.;',
 			'gl_PointSize = 0.;',
 			'}',

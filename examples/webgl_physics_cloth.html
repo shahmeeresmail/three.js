@@ -32,7 +32,7 @@
 	<div id="info">Ammo.js physics soft body cloth demo<br>Press Q or A to move the arm.</div>
         <div id="container"><br /><br /><br /><br /><br />Loading...</div>
 
-	<script src="../build/three.js"></script>
+	<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 	<script src="js/libs/ammo.js"></script>
 	<script src="js/controls/OrbitControls.js"></script>
         <script src="js/Detector.js"></script>
@@ -137,7 +137,7 @@
 
 			container.innerHTML = "";
 
-			container.appendChild( renderer.domElement );
+			container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 			stats = new Stats();
 			stats.domElement.style.position = 'absolute';
@@ -410,7 +410,7 @@
 
 			controls.update( deltaTime );
 
-			renderer.render( scene, camera );
+			effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			time += deltaTime;
 

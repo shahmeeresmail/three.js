@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>three.js webgl - materials - HDR texture</title>
@@ -37,7 +37,7 @@
 			based on <a href="http://spidergl.org/example.php?id=13" target="_blank">SpiderGL</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
@@ -50,7 +50,7 @@
 			uniform float       exposure;
 			uniform float       brightMax;
 
-			varying vec2  vUv;
+			in vec2  vUv;
 
 			vec3 decode_pnghdr( const in vec4 color ) {
 
@@ -68,18 +68,18 @@
 
 			void main()	{
 
-				vec4 color = texture2D( tDiffuse, vUv );
+				vec4 color = texture( tDiffuse, vUv );
 				color.xyz  = decode_pnghdr( color );
 
 				// apply gamma correction and exposure
-				//gl_FragColor = vec4( pow( exposure * color.xyz, vec3( 0.474 ) ), 1.0 );
+				//colorOutput = vec4( pow( exposure * color.xyz, vec3( 0.474 ) ), 1.0 );
 
 				// Perform tone-mapping
 				float Y = dot(vec4(0.30, 0.59, 0.11, 0.0), color);
 				float YD = exposure * (exposure/brightMax + 1.0) / (exposure + 1.0);
 				color *= YD;
 
-				gl_FragColor = vec4( color.xyz, 1.0 );
+				colorOutput = vec4( color.xyz, 1.0 );
 
 			}
 
@@ -89,12 +89,12 @@
 
 		<script id="vs-hdr" type="x-shader/x-vertex">
 
-			varying vec2 vUv;
+			out vec2 vUv;
 
 			void main()	{
 
 				vUv  = uv;
-				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+				gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );
 
 			}
 
@@ -151,7 +151,7 @@
 				renderer = new THREE.WebGLRenderer();
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );
@@ -210,7 +210,7 @@
 
 				materialHDR.uniforms.exposure.value += sign * rate * delta;
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

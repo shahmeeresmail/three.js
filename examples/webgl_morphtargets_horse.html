@@ -15,7 +15,7 @@
 	</head>
 	<body>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/libs/stats.min.js"></script>
 
 		<script>
@@ -138,7 +138,7 @@
 
 				}
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

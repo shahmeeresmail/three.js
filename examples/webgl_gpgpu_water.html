@@ -37,7 +37,7 @@
 			Press mouse button to orbit around. 'W' key toggles wireframe.
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
 		<script src="js/libs/dat.gui.min.js"></script>
@@ -273,7 +273,7 @@
 				renderer.setClearColor( 0x000000 );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				controls = new THREE.OrbitControls( camera, renderer.domElement );
 
@@ -558,7 +558,7 @@
 				waterUniforms.heightmap.value = gpuCompute.getCurrentRenderTarget( heightmapVariable ).texture;
 
 				// Render
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

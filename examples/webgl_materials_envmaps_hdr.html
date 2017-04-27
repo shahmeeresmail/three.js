@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>threejs webgl - materials - hdr environment mapping</title>
@@ -31,7 +31,7 @@
 		<div id="info"><a href="http://threejs.org" target="_blank">threejs</a> - High dynamic range (RGBE) Image-based Lighting (IBL)<br />using run-time generated pre-filtered roughness mipmaps (PMREM)<br/>
 			Created by Prashant Sharma and <a href="http://clara.io/" target="_blank">Ben Houston</a>.</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 		<script src="js/loaders/RGBELoader.js"></script>
 		<script src="js/loaders/HDRCubeTextureLoader.js"></script>
@@ -200,7 +200,7 @@
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.shadowMap.enabled = true;
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				//renderer.toneMapping = THREE.ReinhardToneMapping;
 				renderer.gammaInput = true;
@@ -292,7 +292,7 @@
 
 				}
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

@@ -36,7 +36,7 @@
 		<a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> webgl - morph targets - human</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/UCSCharacter.js"></script>
 
@@ -101,7 +101,7 @@
 				renderer.setClearColor( 0xffffff );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				// CHARACTER
 
@@ -244,7 +244,7 @@
 
 				character.mixer.update( delta );
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

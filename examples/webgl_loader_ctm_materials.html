@@ -39,7 +39,7 @@
 		skybox by <a href="http://ict.debevec.org/~debevec/" target="_blank">Paul Debevec</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/controls/OrbitControls.js"></script>
 
@@ -127,7 +127,7 @@
 				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 				renderer.domElement.style.position = "relative";
 
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				//
 
@@ -306,7 +306,7 @@
 
 				controls.update();
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

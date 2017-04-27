@@ -24,7 +24,7 @@
 		<div id="container"></div>
 		<input id="lightButton" type="button" value="Switch to PointLight" onclick="lightButtonHandler()">
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/objects/ShadowMesh.js"></script>
 		<script>
 
@@ -212,7 +212,7 @@
 				pyramidShadow.update( groundPlane, lightPosition4D );
 
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 
 			}

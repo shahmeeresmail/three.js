@@ -30,7 +30,7 @@
 		Press "Q" to toggle world/local space, keep "Ctrl" down to snap to grid
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/TransformControls.js"></script>
 
 		<script>
@@ -148,7 +148,7 @@
 
 				control.update();
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

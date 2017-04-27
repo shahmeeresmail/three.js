@@ -35,7 +35,7 @@
 		<div id="container"></div>
 		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> - raw shader demo</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
@@ -59,7 +59,7 @@
 				vPosition = position;
 				vColor = color;
 
-				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+				gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );
 
 			}
 
@@ -158,7 +158,7 @@
 				renderer.setClearColor( 0x101010 );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );
@@ -196,7 +196,7 @@
 				object.rotation.y = time * 0.0005;
 				object.material.uniforms.time.value = time * 0.005;
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

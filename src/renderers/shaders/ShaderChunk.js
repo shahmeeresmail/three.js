@@ -124,6 +124,7 @@ export var ShaderChunk = {
 	color_pars_vertex: color_pars_vertex,
 	color_vertex: color_vertex,
 	common: common,
+	stereo_defines: stereo_defines,
 	cube_uv_reflection_fragment: cube_uv_reflection_fragment,
 	defaultnormal_vertex: defaultnormal_vertex,
 	displacementmap_pars_vertex: displacementmap_pars_vertex,

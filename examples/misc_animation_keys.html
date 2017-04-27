@@ -36,7 +36,7 @@
 			<a href="http://threejs.org" target="_blank">three.js</a> webgl - animation - basic use
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/loaders/collada/Animation.js"></script>
 		<script src="js/loaders/collada/AnimationHandler.js"></script>
 		<script src="js/loaders/collada/KeyFrameAnimation.js"></script>
@@ -65,7 +65,7 @@
 				renderer.setClearColor( 0x555555 );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );
@@ -163,7 +163,7 @@
 			};
 
 			var render = function () {
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 				stats.update();
 			};
 

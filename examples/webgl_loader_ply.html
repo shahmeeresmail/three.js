@@ -42,7 +42,7 @@
 			PLY loader test by <a href="https://github.com/menway">Wei Meng</a>. Image from <a href="http://people.sc.fsu.edu/~jburkardt/data/ply/ply.html">John Burkardt</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/loaders/PLYLoader.js"></script>
 
@@ -149,7 +149,7 @@
 				renderer.shadowMap.enabled = true;
 				renderer.shadowMap.renderReverseSided = false;
 
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				// stats
 
@@ -213,7 +213,7 @@
 
 				camera.lookAt( cameraTarget );
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

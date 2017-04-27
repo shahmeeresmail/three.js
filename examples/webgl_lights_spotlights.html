@@ -39,7 +39,7 @@
 			Where the lights converge to make white light the shadows will appear as C M Y from light color pairing.
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/libs/dat.gui.min.js"></script>
 		<script src="js/libs/tween.min.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
@@ -177,7 +177,7 @@
 				if ( lightHelper2 ) lightHelper2.update();
 				if ( lightHelper3 ) lightHelper3.update();
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 				requestAnimationFrame( render );
 

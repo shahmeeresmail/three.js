@@ -30,7 +30,7 @@
 		<a href="http://threejs.org" target="_blank">three.js</a> - BabylonLoader test
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/loaders/BabylonLoader.js"></script>
 		<script src="js/controls/TrackballControls.js"></script>
 
@@ -133,7 +133,7 @@
 			function render() {
 
 				controls.update();
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

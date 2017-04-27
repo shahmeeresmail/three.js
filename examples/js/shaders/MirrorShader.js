@@ -23,7 +23,7 @@ THREE.MirrorShader = {
 		"void main() {",
 
 			"vUv = uv;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 

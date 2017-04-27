@@ -36,7 +36,7 @@
 		</div>
 
 		<script src="js/libs/dat.gui.min.js"></script>
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 		<script src="js/libs/stats.min.js"></script>
 
@@ -180,7 +180,7 @@
 				renderer.gammaInput = true;
 				renderer.gammaOutput = true;
 
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				//
 
@@ -289,7 +289,7 @@
 				var time = Date.now() * 0.001;
 
 				group.rotation.y = time * 0.1;
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

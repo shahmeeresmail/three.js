@@ -62,7 +62,7 @@
 		</style>
 	</head>
 	<body>
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/controls/TrackballControls.js"></script>
 		<script src="js/loaders/PDBLoader.js"></script>
@@ -296,8 +296,8 @@
 
 			function render() {
 
-				renderer.render( scene, camera );
-				labelRenderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
+				labeleffect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>three.js webgl - orbit controls</title>
@@ -37,7 +37,7 @@
 			<a href="http://threejs.org" target="_blank">three.js</a> - orbit controls example
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/controls/OrbitControls.js"></script>
 
@@ -66,7 +66,7 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 				var container = document.getElementById( 'container' );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
 				camera.position.z = 500;
@@ -141,7 +141,7 @@
 
 			function render() {
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

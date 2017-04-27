@@ -30,7 +30,7 @@
 			<a href="http://threejs.org" target="_blank">three.js</a> - BVH Loader -
 			animation from <a href="http://mocap.cs.cmu.edu/">http://mocap.cs.cmu.edu/</a>
 		</div>
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 		<script src="js/loaders/BVHLoader.js"></script>
 		<script>
@@ -104,7 +104,7 @@
 				if ( mixer ) mixer.update( delta );
 				if ( skeletonHelper ) skeletonHelper.update();
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

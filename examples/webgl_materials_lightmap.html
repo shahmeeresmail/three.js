@@ -19,7 +19,7 @@
 	</head>
 
 	<body>
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/controls/OrbitControls.js"></script>
 
@@ -35,7 +35,7 @@
 				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
 				vWorldPosition = worldPosition.xyz;
 
-				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+				gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );
 
 			}
 
@@ -128,7 +128,7 @@
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				renderer.gammaInput = true;
 				renderer.gammaOutput = true;
@@ -177,7 +177,7 @@
 
 				requestAnimationFrame( animate );
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 				stats.update();
 
 			}

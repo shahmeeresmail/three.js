@@ -22,7 +22,7 @@ THREE.ShaderLib[ 'mirror' ] = {
 			"vec4 worldPosition = modelMatrix * vec4( position, 1.0 );",
 			"mirrorCoord = textureMatrix * worldPosition;",
 
-			"gl_Position = projectionMatrix * mvPosition;",
+			"gl_Position = GET_PROJECTION_MATRIX * mvPosition;",
 
 		"}"
 

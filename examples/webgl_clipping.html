@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>three.js webgl - clipping planes</title>
@@ -14,7 +14,7 @@
 	</head>
 	<body>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 
 		<script src="js/libs/dat.gui.min.js"></script>
@@ -179,7 +179,7 @@
 				object.rotation.y = time * 0.2;
 				object.scale.setScalar( Math.cos( time ) * 0.125 + 0.875 );
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

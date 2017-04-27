@@ -20,12 +20,12 @@ THREE.DotScreenShader = {
 
 	vertexShader: [
 
-		"varying vec2 vUv;",
+		"out vec2 vUv;",
 
 		"void main() {",
 
 			"vUv = uv;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -40,7 +40,7 @@ THREE.DotScreenShader = {
 
 		"uniform sampler2D tDiffuse;",
 
-		"varying vec2 vUv;",
+		"in vec2 vUv;",
 
 		"float pattern() {",
 
@@ -55,11 +55,11 @@ THREE.DotScreenShader = {
 
 		"void main() {",
 
-			"vec4 color = texture2D( tDiffuse, vUv );",
+			"vec4 color = texture( tDiffuse, vUv );",
 
 			"float average = ( color.r + color.g + color.b ) / 3.0;",
 
-			"gl_FragColor = vec4( vec3( average * 10.0 - 5.0 + pattern() ), color.a );",
+			"colorOutput = vec4( vec3( average * 10.0 - 5.0 + pattern() ), color.a );",
 
 		"}"
 

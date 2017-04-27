@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>three.js - platformer demo</title>
@@ -32,7 +32,7 @@
 		<div id="container"></div>
 		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> - platformer demo. cubemap by <a href="http://www.zfight.com/" target="_blank">Jochum Skoglund</a>.<br />Use arrow keys to look around, WASD to move and SPACE to jump.</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script>
 
@@ -258,6 +258,8 @@
 			var renderer = new THREE.WebGLRenderer({ antialias : true });
 			renderer.setPixelRatio( window.devicePixelRatio );
 
+			var effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
+
 			var camera = new THREE.PerspectiveCamera( 60, 1, 0.1, 9000 );
 
 			var scene = new THREE.Scene();
@@ -300,7 +302,7 @@
 					// call our game loop with the time elapsed since last rendering, in ms
 					gameLoop( timeElapsed );
 
-					renderer.render( scene, camera );
+					effect.render( scene, camera ); //renderer.render( scene, camera );
 					requestAnimationFrame( render );
 				};
 

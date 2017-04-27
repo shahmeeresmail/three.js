@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>three.js - ASCII Effect</title>
@@ -15,7 +15,7 @@
 	</head>
 	<body>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/controls/TrackballControls.js"></script>
 		<script src="js/effects/AsciiEffect.js"></script>
@@ -83,7 +83,7 @@
 				renderer = new THREE.CanvasRenderer();
 				renderer.setClearColor( 0xf0f0f0 );
 				renderer.setSize( width, height );
-				// container.appendChild( renderer.domElement );
+				// container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				effect = new THREE.AsciiEffect( renderer );
 				effect.setSize( width, height );

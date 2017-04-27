@@ -34,7 +34,7 @@
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script type="x-shader/x-vertex" id="vertexshader">
 
@@ -51,7 +51,7 @@
 
 				vColor = customColor;
 
-				gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+				gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( newPosition, 1.0 );
 
 			}
 
@@ -167,7 +167,7 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 
 			var container = document.getElementById( 'container' );
-			container.appendChild( renderer.domElement );
+			container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 			stats = new Stats();
 			container.appendChild( stats.dom );
@@ -218,7 +218,7 @@
 
 			attributes.displacement.needsUpdate = true;
 
-			renderer.render( scene, camera );
+			effect.render( scene, camera ); //renderer.render( scene, camera );
 
 		}
 

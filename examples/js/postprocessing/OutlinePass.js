@@ -330,7 +330,7 @@ THREE.OutlinePass.prototype = Object.assign( Object.create( THREE.Pass.prototype
 					vPosition = modelViewMatrix * vec4( position, 1.0 );\
 					vec4 worldPosition = modelMatrix * vec4( position, 1.0 );\
 					projTexCoord = textureMatrix * worldPosition;\
-					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n\
+					gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );\n\
 				}",
 
 			fragmentShader:
@@ -365,7 +365,7 @@ THREE.OutlinePass.prototype = Object.assign( Object.create( THREE.Pass.prototype
 				"varying vec2 vUv;\n\
 				void main() {\n\
 					vUv = uv;\n\
-					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n\
+					gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );\n\
 				}",
 
 			fragmentShader:
@@ -413,7 +413,7 @@ THREE.OutlinePass.prototype = Object.assign( Object.create( THREE.Pass.prototype
 				"varying vec2 vUv;\n\
 				void main() {\n\
 					vUv = uv;\n\
-					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n\
+					gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );\n\
 				}",
 
 			fragmentShader:
@@ -464,7 +464,7 @@ THREE.OutlinePass.prototype = Object.assign( Object.create( THREE.Pass.prototype
 				"varying vec2 vUv;\n\
 				void main() {\n\
 					vUv = uv;\n\
-					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n\
+					gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );\n\
 				}",
 
 			fragmentShader:

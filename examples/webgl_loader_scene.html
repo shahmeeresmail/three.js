@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>three.js webgl - io - scene loader</title>
@@ -91,7 +91,8 @@
 			</center>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
+        <script src="js/effects/StereoEffect.js"></script>
 		<script src="js/MorphAnimMesh.js"></script>
 		<script src="js/loaders/collada/Animation.js"></script>
 		<script src="js/loaders/collada/AnimationHandler.js"></script>
@@ -126,6 +127,7 @@
 
 			var camera, scene, loaded;
 			var renderer;
+			var effect;
 
 			var mouseX = 0, mouseY = 0;
 
@@ -167,12 +169,15 @@
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+				//renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 				renderer.domElement.style.position = "relative";
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				renderer.gammaInput = true;
 				renderer.gammaOutput = true;
+
+				effect = new THREE.StereoEffect(renderer);
+				effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );
@@ -264,7 +269,7 @@
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 
-				renderer.setSize( window.innerWidth, window.innerHeight );
+				effect.setSize( window.innerWidth, window.innerHeight );
 
 			}
 
@@ -364,7 +369,7 @@
 
 				}
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera );
 
 			}
 

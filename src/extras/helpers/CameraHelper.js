@@ -152,6 +152,8 @@ CameraHelper.prototype.update = function () {
 		// world matrix must be identity
 
 		camera.projectionMatrix.copy( this.camera.projectionMatrix );
+		camera.projectionMatrixR.copy( this.camera.projectionMatrixR );
+
 
 		// center / target
 

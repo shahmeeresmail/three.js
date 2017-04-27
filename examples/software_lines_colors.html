@@ -44,7 +44,7 @@
 			[<a href="http://en.wikipedia.org/wiki/Hilbert_curve">Hilbert curve</a> thanks to <a href="http://www.openprocessing.org/visuals/?visualID=15599">Thomas Diewald</a>]
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/geometries/hilbert3D.js"></script>
 
@@ -80,7 +80,7 @@
 				renderer = new THREE.SoftwareRenderer();
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				var geometry = new THREE.Geometry(),
 				geometry2 = new THREE.Geometry(),
@@ -210,7 +210,7 @@
 
 				}
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

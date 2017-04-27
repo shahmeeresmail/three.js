@@ -17,13 +17,13 @@ THREE.ColorCorrectionShader = {
 
 	vertexShader: [
 
-		"varying vec2 vUv;",
+		"out vec2 vUv;",
 
 		"void main() {",
 
 			"vUv = uv;",
 
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -36,12 +36,12 @@ THREE.ColorCorrectionShader = {
 		"uniform vec3 mulRGB;",
 		"uniform vec3 addRGB;",
 
-		"varying vec2 vUv;",
+		"in vec2 vUv;",
 
 		"void main() {",
 
-			"gl_FragColor = texture2D( tDiffuse, vUv );",
-			"gl_FragColor.rgb = mulRGB * pow( ( gl_FragColor.rgb + addRGB ), powRGB );",
+			"colorOutput = texture( tDiffuse, vUv );",
+			"colorOutput.rgb = mulRGB * pow( ( colorOutput.rgb + addRGB ), powRGB );",
 
 		"}"
 

@@ -58,7 +58,7 @@ https://github.com/creationix/msgpack-js-browser
 
 				if ( scene !== undefined ) {
 
-					renderer.render( scene, camera );
+					effect.render( scene, camera ); //renderer.render( scene, camera );
 
 				}
 
@@ -128,7 +128,7 @@ https://github.com/creationix/msgpack-js-browser
 				renderer.setClearColor( 0x000000, 0 );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				var aspect = container.offsetWidth / container.offsetHeight;
 				camera = new THREE.PerspectiveCamera( 60, aspect, 0.01, 50 );

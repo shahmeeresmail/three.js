@@ -36,7 +36,7 @@
 
 			void main() {
 				vUv = uv;
-				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+				gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4(position, 1.0);
 			}
 		</script>
 		<script id="noiseRandom1D-frag" type="x-shader/x-fragment">
@@ -77,7 +77,7 @@
 
 		<div id="container"></div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/libs/stats.min.js"></script>
 		<script src="js/libs/dat.gui.min.js"></script>
 

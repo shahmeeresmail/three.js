@@ -48,7 +48,7 @@
 		anisotropy: <span class="c" id="val_right"></span><br/>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
@@ -157,7 +157,7 @@
 				renderer.autoClear = false;
 
 				renderer.domElement.style.position = "relative";
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				// STATS1
 

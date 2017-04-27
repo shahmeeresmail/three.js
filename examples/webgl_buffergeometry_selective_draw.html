@@ -51,7 +51,7 @@
 		void main() {
 			vColor = vertColor;
 			vVisible = visible;
-			gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+			gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4(position,1.0);
 		}
 	</script>
 	<script type="x-shader/x-fragment" id="fragmentshader">
@@ -244,7 +244,7 @@
 			mesh.rotation.y = time * 0.5;
 
 			stats.update();
-			renderer.render( scene, camera );
+			effect.render( scene, camera ); //renderer.render( scene, camera );
 
 		}
 

@@ -14,7 +14,7 @@
 	</head>
 	<body>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/renderers/Projector.js"></script>
 		<script src="js/renderers/SVGRenderer.js"></script>
@@ -221,7 +221,7 @@
 
 				group.rotation.x += 0.01;
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

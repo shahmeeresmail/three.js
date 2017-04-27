@@ -61,7 +61,7 @@
 			- <span class="link" id="export">export to obj</span>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/exporters/OBJExporter.js"></script>
 
 		<script>
@@ -249,7 +249,7 @@
 				camera.lookAt( scene.position );
 
 				light.position.set( camera.position.x, camera.position.y, camera.position.z ).normalize();
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

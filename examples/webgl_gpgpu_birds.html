@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>three.js webgl - gpgpu - flocking</title>
@@ -38,7 +38,7 @@
 
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
 		<script src="js/libs/dat.gui.min.js"></script>
@@ -61,9 +61,9 @@
 			void main()	{
 
 				vec2 uv = gl_FragCoord.xy / resolution.xy;
-				vec4 tmpPos = texture2D( texturePosition, uv );
+				vec4 tmpPos = texture( texturePosition, uv );
 				vec3 position = tmpPos.xyz;
-				vec3 velocity = texture2D( textureVelocity, uv ).xyz;
+				vec3 velocity = texture( textureVelocity, uv ).xyz;
 
 				float phase = tmpPos.w;
 
@@ -71,7 +71,7 @@
 					length( velocity.xz ) * delta * 3. +
 					max( velocity.y, 0.0 ) * delta * 6. ), 62.83 );
 
-				gl_FragColor = vec4( position + velocity * delta * 15. , phase );
+				colorOutput = vec4( position + velocity * delta * 15. , phase );
 
 			}
 
@@ -122,8 +122,8 @@
 				vec2 uv = gl_FragCoord.xy / resolution.xy;
 				vec3 birdPosition, birdVelocity;
 
-				vec3 selfPosition = texture2D( texturePosition, uv ).xyz;
-				vec3 selfVelocity = texture2D( textureVelocity, uv ).xyz;
+				vec3 selfPosition = texture( texturePosition, uv ).xyz;
+				vec3 selfVelocity = texture( textureVelocity, uv ).xyz;
 
 				float dist;
 				vec3 dir; // direction
@@ -174,7 +174,7 @@
 					for (float x=0.0;x<width;x++) {
 
 						vec2 ref = vec2( x + 0.5, y + 0.5 ) / resolution.xy;
-						birdPosition = texture2D( texturePosition, ref ).xyz;
+						birdPosition = texture( texturePosition, ref ).xyz;
 
 						dir = birdPosition - selfPosition;
 						dist = length(dir);
@@ -199,7 +199,7 @@
 							float threshDelta = alignmentThresh - separationThresh;
 							float adjustedPercent = ( percent - separationThresh ) / threshDelta;
 
-							birdVelocity = texture2D( textureVelocity, ref ).xyz;
+							birdVelocity = texture( textureVelocity, ref ).xyz;
 
 							f = ( 0.5 - cos( adjustedPercent * PI_2 ) * 0.5 + 0.5 ) * delta;
 							velocity += normalize(birdVelocity) * f;
@@ -230,7 +230,7 @@
 					velocity = normalize( velocity ) * limit;
 				}
 
-				gl_FragColor = vec4( velocity, 1.0 );
+				colorOutput = vec4( velocity, 1.0 );
 
 			}
 
@@ -246,16 +246,16 @@
 			uniform sampler2D texturePosition;
 			uniform sampler2D textureVelocity;
 
-			varying vec4 vColor;
-			varying float z;
+			out vec4 vColor;
+			out float z;
 
 			uniform float time;
 
 			void main() {
 
-				vec4 tmpPos = texture2D( texturePosition, reference );
+				vec4 tmpPos = texture( texturePosition, reference );
 				vec3 pos = tmpPos.xyz;
-				vec3 velocity = normalize(texture2D( textureVelocity, reference ).xyz);
+				vec3 velocity = normalize(texture( textureVelocity, reference ).xyz);
 
 				vec3 newPosition = position;
 
@@ -297,7 +297,7 @@
 				z = newPosition.z;
 
 				vColor = vec4( birdColor, 1.0 );
-				gl_Position = projectionMatrix *  viewMatrix  * vec4( newPosition, 1.0 );
+				gl_Position = GET_PROJECTION_MATRIX *  viewMatrix  * vec4( newPosition, 1.0 );
 			}
 
 		</script>
@@ -305,15 +305,15 @@
 		<!-- bird geometry shader -->
 		<script type="x-shader/x-fragment" id="birdFS">
 
-			varying vec4 vColor;
-			varying float z;
+			in vec4 vColor;
+			in float z;
 
 			uniform vec3 color;
 
 			void main() {
 				// Fake colors for now
 				float z2 = 0.2 + ( 1000. - z ) / 1000. * vColor.x;
-				gl_FragColor = vec4( z2, z2, z2, 1. );
+				colorOutput = vec4( z2, z2, z2, 1. );
 
 			}
 
@@ -419,6 +419,7 @@
 
 			var container, stats;
 			var camera, scene, renderer, geometry, i, h, color;
+			var effect;
 			var mouseX = 0, mouseY = 0;
 
 			var windowHalfX = window.innerWidth / 2;
@@ -470,7 +471,7 @@
 				renderer.setClearColor( scene.fog.color );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				initComputeRenderer();
 
@@ -711,7 +712,7 @@
 				birdUniforms.texturePosition.value = gpuCompute.getCurrentRenderTarget( positionVariable ).texture;
 				birdUniforms.textureVelocity.value = gpuCompute.getCurrentRenderTarget( velocityVariable ).texture;
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

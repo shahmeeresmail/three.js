@@ -34,7 +34,7 @@
 		<div id="container"><br /><br /><br /><br /><br />Generating...</div>
 		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> - terrain demo. <a href="canvas_geometry_terrain.html">generate another</a></div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/renderers/Projector.js"></script>
 		<script src="js/renderers/CanvasRenderer.js"></script>
@@ -94,7 +94,7 @@
 
 				container.innerHTML = "";
 
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );
@@ -207,7 +207,7 @@
 				camera.position.y += ( - mouseY - camera.position.y ) * 0.05 + 15;
 				camera.lookAt( scene.position );
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

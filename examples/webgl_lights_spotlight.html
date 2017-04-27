@@ -37,7 +37,7 @@
 			<a href="http://threejs.org" target="_blank">three.js</a> webgl - spotlight by <a href="http://master-domain.com" target="_blank">Master James</a><br />
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/libs/dat.gui.min.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 		<script src="js/Detector.js"></script>
@@ -135,7 +135,7 @@
 			function render() {
 
 				lightHelper.update(); // required
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

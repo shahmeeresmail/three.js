@@ -33,7 +33,7 @@
 		<div id="container"></div>
 		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> read float pixels webgl example</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
@@ -76,7 +76,7 @@
 			void main() {
 
 				vUv = uv;
-				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+				gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );
 
 			}
 
@@ -174,7 +174,7 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.autoClear = false;
 
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );

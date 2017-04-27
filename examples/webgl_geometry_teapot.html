@@ -35,7 +35,7 @@
 			from <a href="https://www.udacity.com/course/interactive-3d-graphics--cs291">Udacity Interactive 3D Graphics</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/controls/OrbitControls.js"></script>
 
@@ -104,7 +104,7 @@
 				renderer.setSize( canvasWidth, canvasHeight );
 				renderer.gammaInput = true;
 				renderer.gammaOutput = true;
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				// EVENTS
 				window.addEventListener( 'resize', onWindowResize, false );
@@ -329,7 +329,7 @@
 
 				}
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

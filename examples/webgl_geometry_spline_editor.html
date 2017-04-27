@@ -15,7 +15,7 @@
 	</head>
 	<body>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 		<script src="js/controls/TransformControls.js"></script>
 		<script src="js/controls/DragControls.js"></script>
@@ -103,7 +103,7 @@
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.shadowMap.enabled = true;
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				var info = document.createElement( 'div' );
 				info.style.position = 'absolute';
@@ -421,7 +421,7 @@
 				splines.uniform.mesh.visible = uniform.checked;
 				splines.centripetal.mesh.visible = centripetal.checked;
 				splines.chordal.mesh.visible = chordal.checked;
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

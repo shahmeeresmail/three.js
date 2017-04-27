@@ -124,7 +124,7 @@ THREE.OutlineEffect = function ( renderer, parameters ) {
 
 		"void main() {",
 
-		"	gl_FragColor = vec4( outlineColor, outlineAlpha );",
+		"	colorOutput = vec4( outlineColor, outlineAlpha );",
 
 		"	#include <fog_fragment>",
 

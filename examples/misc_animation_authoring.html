@@ -30,7 +30,7 @@
 		Press "Q" to toggle world/local space, hold down "Ctrl" to snap to grid
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/TransformControls.js"></script>
 		<script src="js/libs/timeliner_gui.min.js"></script>
 		<script src="js/TimelinerController.js"></script>
@@ -174,7 +174,7 @@
 
 				control.update();
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

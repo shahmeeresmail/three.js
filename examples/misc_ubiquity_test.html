@@ -14,7 +14,7 @@
 	</head>
 	<body>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/renderers/Projector.js"></script>
 		<script src="js/renderers/CanvasRenderer.js"></script>
@@ -255,10 +255,10 @@
 
 				scene.updateMatrixWorld();
 
-				canvasRenderer.render( scene, camera );
-				svgRenderer.render( scene, camera );
-				softwareRenderer.render( scene, camera );
-				webglRenderer.render( scene, camera );
+				canvaseffect.render( scene, camera ); //renderer.render( scene, camera );
+				svgeffect.render( scene, camera ); //renderer.render( scene, camera );
+				softwareeffect.render( scene, camera ); //renderer.render( scene, camera );
+				webgleffect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

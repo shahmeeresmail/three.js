@@ -27,12 +27,12 @@ THREE.ConvolutionShader = {
 
 		"uniform vec2 uImageIncrement;",
 
-		"varying vec2 vUv;",
+		"out vec2 vUv;",
 
 		"void main() {",
 
 			"vUv = uv - ( ( KERNEL_SIZE_FLOAT - 1.0 ) / 2.0 ) * uImageIncrement;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -45,7 +45,7 @@ THREE.ConvolutionShader = {
 		"uniform sampler2D tDiffuse;",
 		"uniform vec2 uImageIncrement;",
 
-		"varying vec2 vUv;",
+		"in vec2 vUv;",
 
 		"void main() {",
 
@@ -54,12 +54,12 @@ THREE.ConvolutionShader = {
 
 			"for( int i = 0; i < KERNEL_SIZE_INT; i ++ ) {",
 
-				"sum += texture2D( tDiffuse, imageCoord ) * cKernel[ i ];",
+				"sum += texture( tDiffuse, imageCoord ) * cKernel[ i ];",
 				"imageCoord += uImageIncrement;",
 
 			"}",
 
-			"gl_FragColor = sum;",
+			"colorOutput = sum;",
 
 		"}"
 

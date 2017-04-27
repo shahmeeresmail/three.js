@@ -54,7 +54,7 @@
 		[based on greggman's <a href="http://webglsamples.googlecode.com/hg/blob/blob.html">blob</a>, original code by Henrik Rydgård]
 	</div>
 
-	<script src="../build/three.js"></script>
+	<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 	<script src="js/controls/OrbitControls.js"></script>
 
@@ -162,7 +162,7 @@
 			renderer.domElement.style.top = MARGIN + "px";
 			renderer.domElement.style.left = "0px";
 
-			container.appendChild( renderer.domElement );
+			container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 			//
 
@@ -647,7 +647,7 @@
 			} else {
 
 				renderer.clear();
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

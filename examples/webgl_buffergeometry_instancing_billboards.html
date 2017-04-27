@@ -47,7 +47,7 @@
 		<div id="notSupported" style="display:none">Sorry your graphics card + browser does not support hardware instancing</div>
 	</div>
 
-	<script src="../build/three.js"></script>
+	<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 	<script src="js/Detector.js"></script>
 	<script src="js/libs/stats.min.js"></script>
 
@@ -73,7 +73,7 @@
 			scale = scale * 10.0 + 10.0;
 			mvPosition.xyz += position * scale;
 			vUv = uv;
-			gl_Position = projectionMatrix * mvPosition;
+			gl_Position = GET_PROJECTION_MATRIX * mvPosition;
 
 		}
 	</script>
@@ -172,7 +172,7 @@
 
 			renderer.setPixelRatio( window.devicePixelRatio );
 			renderer.setSize( window.innerWidth, window.innerHeight );
-			container.appendChild( renderer.domElement );
+			container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 			stats = new Stats();
 			container.appendChild( stats.dom );
@@ -210,7 +210,7 @@
 			mesh.rotation.x = time * 0.2;
 			mesh.rotation.y = time * 0.4;
 
-			renderer.render( scene, camera );
+			effect.render( scene, camera ); //renderer.render( scene, camera );
 
 		}
 

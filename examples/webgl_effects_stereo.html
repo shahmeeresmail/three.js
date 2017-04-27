@@ -37,7 +37,7 @@
 			<a href="http://threejs.org" target="_blank">three.js</a> - effects - stereo. skybox by <a href="http://www.zfight.com/" target="_blank">Jochum Skoglund</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/effects/StereoEffect.js"></script>
 
@@ -105,7 +105,7 @@
 
 				renderer = new THREE.WebGLRenderer();
 				renderer.setPixelRatio( window.devicePixelRatio );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				effect = new THREE.StereoEffect( renderer );
 				effect.setSize( window.innerWidth, window.innerHeight );

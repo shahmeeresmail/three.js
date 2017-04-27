@@ -310,7 +310,8 @@ function WebGLProgram( renderer, code, material, parameters ) {
 	} else {
 
 		prefixVertex = [
-
+            '#version 300 es',
+            (useMultiviewExtension == true) ? '#extension GL_OVR_multiview2 : require' : '',
 			'precision ' + parameters.precision + ' float;',
 			'precision ' + parameters.precision + ' int;',
 
@@ -362,6 +363,7 @@ function WebGLProgram( renderer, code, material, parameters ) {
 			'uniform mat4 modelMatrix;',
 			'uniform mat4 modelViewMatrix;',
 			'uniform mat4 projectionMatrix;',
+            'uniform mat4 projectionMatrixR;',
 			'uniform mat4 viewMatrix;',
 			'uniform mat3 normalMatrix;',
 			'uniform vec3 cameraPosition;',
@@ -413,7 +415,7 @@ function WebGLProgram( renderer, code, material, parameters ) {
 		].filter( filterEmptyLine ).join( '\n' );
 
 		prefixFragment = [
-
+            '#version 300 es',
 			customExtensions,
 
 			'precision ' + parameters.precision + ' float;',

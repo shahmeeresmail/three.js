@@ -35,12 +35,12 @@ THREE.FilmShader = {
 
 	vertexShader: [
 
-		"varying vec2 vUv;",
+		"out vec2 vUv;",
 
 		"void main() {",
 
 			"vUv = uv;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -66,12 +66,12 @@ THREE.FilmShader = {
 
 		"uniform sampler2D tDiffuse;",
 
-		"varying vec2 vUv;",
+		"in vec2 vUv;",
 
 		"void main() {",
 
 			// sample the source
-			"vec4 cTextureScreen = texture2D( tDiffuse, vUv );",
+			"vec4 cTextureScreen = texture( tDiffuse, vUv );",
 
 			// make some noise
 			"float dx = rand( vUv + time );",
@@ -95,7 +95,7 @@ THREE.FilmShader = {
 
 			"}",
 
-			"gl_FragColor =  vec4( cResult, cTextureScreen.a );",
+			"colorOutput =  vec4( cResult, cTextureScreen.a );",
 
 		"}"
 

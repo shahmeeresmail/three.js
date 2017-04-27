@@ -8,4 +8,4 @@
 
 #endif
 
-gl_Position = projectionMatrix * mvPosition;
+gl_Position = GET_PROJECTION_MATRIX * mvPosition;

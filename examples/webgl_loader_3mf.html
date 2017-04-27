@@ -44,7 +44,7 @@
 			<div>Cube gears file from <a href="https://github.com/3MFConsortium/3mf-samples" target="_blank">3mf-samples</a></div>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/loaders/3MFLoader.js"></script>
 
 		<script src="js/Detector.js"></script>
@@ -116,7 +116,7 @@
 
 			function render() {
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

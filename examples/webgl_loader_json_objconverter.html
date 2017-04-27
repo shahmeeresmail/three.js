@@ -35,7 +35,7 @@
 			<a href="http://sketchup.google.com/3dwarehouse/details?mid=f526cc4abf7cb68d76cab47c765b7255">iClone</a>.
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/loaders/DDSLoader.js"></script>
 		<script src="js/renderers/Projector.js"></script>
 		<script src="js/renderers/CanvasRenderer.js"></script>
@@ -286,8 +286,8 @@
 
 				camera.lookAt( scene.position );
 
-				if ( render_gl && has_gl ) webglRenderer.render( scene, camera );
-				if ( render_canvas ) canvasRenderer.render( scene, camera );
+				if ( render_gl && has_gl ) webgleffect.render( scene, camera ); //renderer.render( scene, camera );
+				if ( render_canvas ) canvaseffect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

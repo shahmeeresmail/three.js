@@ -31,7 +31,7 @@
 		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> - dashed lines example</div>
 		<div id="container"></div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/geometries/hilbert3D.js"></script>
 
@@ -101,7 +101,7 @@
 				renderer.setSize( WIDTH, HEIGHT );
 
 				var container = document.getElementById( 'container' );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );
@@ -193,7 +193,7 @@
 
 				}
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

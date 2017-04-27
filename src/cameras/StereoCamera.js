@@ -52,7 +52,7 @@ Object.assign( StereoCamera.prototype, {
 				// Off-axis stereoscopic effect based on
 				// http://paulbourke.net/stereographics/stereorender/
 
-				var projectionMatrix = camera.projectionMatrix.clone();
+				var projMatrix = camera.projectionMatrix.clone();
 				var eyeSep = this.eyeSep / 2;
 				var eyeSepOnProjection = eyeSep * near / focus;
 				var ymax = ( near * Math.tan( _Math.DEG2RAD * fov * 0.5 ) ) / zoom;
@@ -68,20 +68,21 @@ Object.assign( StereoCamera.prototype, {
 				xmin = - ymax * aspect + eyeSepOnProjection;
 				xmax = ymax * aspect + eyeSepOnProjection;
 
-				projectionMatrix.elements[ 0 ] = 2 * near / ( xmax - xmin );
-				projectionMatrix.elements[ 8 ] = ( xmax + xmin ) / ( xmax - xmin );
+				projMatrix.elements[ 0 ] = 2 * near / ( xmax - xmin );
+				projMatrix.elements[ 8 ] = ( xmax + xmin ) / ( xmax - xmin );
 
-				this.cameraL.projectionMatrix.copy( projectionMatrix );
+				this.cameraL.projectionMatrix.copy( projMatrix );
 
 				// for right eye
 
 				xmin = - ymax * aspect - eyeSepOnProjection;
 				xmax = ymax * aspect - eyeSepOnProjection;
 
-				projectionMatrix.elements[ 0 ] = 2 * near / ( xmax - xmin );
-				projectionMatrix.elements[ 8 ] = ( xmax + xmin ) / ( xmax - xmin );
+				projMatrix.elements[ 0 ] = 2 * near / ( xmax - xmin );
+				projMatrix.elements[ 8 ] = ( xmax + xmin ) / ( xmax - xmin );
 
-				this.cameraR.projectionMatrix.copy( projectionMatrix );
+				this.cameraR.projectionMatrix.copy( projMatrix );
+				this.cameraL.projectionMatrixR.copy( projMatrix );
 
 			}
 

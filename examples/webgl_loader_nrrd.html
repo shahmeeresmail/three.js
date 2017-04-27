@@ -47,7 +47,7 @@
 		</div>
 		<div id="inset"></div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/controls/TrackballControls.js"></script>
 
@@ -170,7 +170,7 @@
 					};
 					gui.add(visibilityControl, "visible").name( "Model Visible").onChange( function () {
 						mesh.visible = visibilityControl.visible;
-						renderer.render( scene, camera );
+						effect.render( scene, camera ); //renderer.render( scene, camera );
 					});
 
 				} );
@@ -182,7 +182,7 @@
 
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				controls = new THREE.TrackballControls( camera, renderer.domElement );
 				controls.rotateSpeed = 5.0;
@@ -227,7 +227,7 @@
 				camera2.position.setLength( 300 );
 				camera2.lookAt( scene2.position );
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 				renderer2.render( scene2, camera2);
 
 				stats.update();

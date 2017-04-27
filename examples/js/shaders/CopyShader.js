@@ -15,12 +15,12 @@ THREE.CopyShader = {
 
 	vertexShader: [
 
-		"varying vec2 vUv;",
+		"out vec2 vUv;",
 
 		"void main() {",
 
 			"vUv = uv;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -32,12 +32,12 @@ THREE.CopyShader = {
 
 		"uniform sampler2D tDiffuse;",
 
-		"varying vec2 vUv;",
+		"in vec2 vUv;",
 
 		"void main() {",
 
-			"vec4 texel = texture2D( tDiffuse, vUv );",
-			"gl_FragColor = opacity * texel;",
+			"vec4 texel = texture( tDiffuse, vUv );",
+			"colorOutput = opacity * texel;",
 
 		"}"
 

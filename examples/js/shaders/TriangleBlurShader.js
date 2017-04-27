@@ -14,19 +14,19 @@ THREE.TriangleBlurShader = {
 
 	uniforms : {
 
-		"texture": { value: null },
+		"tex": { value: null },
 		"delta":   { value: new THREE.Vector2( 1, 1 ) }
 
 	},
 
 	vertexShader: [
 
-		"varying vec2 vUv;",
+		"out vec2 vUv;",
 
 		"void main() {",
 
 			"vUv = uv;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -38,10 +38,10 @@ THREE.TriangleBlurShader = {
 
 		"#define ITERATIONS 10.0",
 
-		"uniform sampler2D texture;",
+		"uniform sampler2D tex;",
 		"uniform vec2 delta;",
 
-		"varying vec2 vUv;",
+		"in vec2 vUv;",
 
 		"void main() {",
 
@@ -58,12 +58,12 @@ THREE.TriangleBlurShader = {
 				"float percent = ( t + offset - 0.5 ) / ITERATIONS;",
 				"float weight = 1.0 - abs( percent );",
 
-				"color += texture2D( texture, vUv + delta * percent ) * weight;",
+				"color += texture( tex, vUv + delta * percent ) * weight;",
 				"total += weight;",
 
 			"}",
 
-			"gl_FragColor = color / total;",
+			"colorOutput = color / total;",
 
 		"}"
 

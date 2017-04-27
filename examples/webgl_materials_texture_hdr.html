@@ -37,7 +37,7 @@
 			based on <a href="http://spidergl.org/example.php?id=13" target="_blank">SpiderGL</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/loaders/RGBELoader.js"></script>
 
 		<script src="js/Detector.js"></script>
@@ -104,7 +104,7 @@
 			void main()	{
 
 				vUv  = uv;
-				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+				gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );
 
 			}
 
@@ -163,7 +163,7 @@
 				renderer = new THREE.WebGLRenderer();
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );
@@ -224,7 +224,7 @@
 
 				materialHDR.uniforms.exposure.value += sign * rate * delta;
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

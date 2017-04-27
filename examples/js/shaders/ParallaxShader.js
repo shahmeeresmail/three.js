@@ -32,7 +32,7 @@ THREE.ParallaxShader = {
 			"vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
 			"vViewPosition = -mvPosition.xyz;",
 			"vNormal = normalize( normalMatrix * normal );",
-			"gl_Position = projectionMatrix * mvPosition;",
+			"gl_Position = GET_PROJECTION_MATRIX * mvPosition;",
 
 		"}"
 

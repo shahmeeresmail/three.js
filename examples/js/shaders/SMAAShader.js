@@ -40,7 +40,7 @@ THREE.SMAAShader = [ {
 
 			"SMAAEdgeDetectionVS( vUv );",
 
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -159,7 +159,7 @@ THREE.SMAAShader = [ {
 
 			"SMAABlendingWeightCalculationVS( vUv );",
 
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -395,7 +395,7 @@ THREE.SMAAShader = [ {
 
 			"SMAANeighborhoodBlendingVS( vUv );",
 
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 

@@ -51,12 +51,12 @@ THREE.BokehShader = {
 
 	vertexShader: [
 
-		"varying vec2 vUv;",
+		"out vec2 vUv;",
 
 		"void main() {",
 
 			"vUv = uv;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -66,7 +66,7 @@ THREE.BokehShader = {
 
 		"#include <common>",
 
-		"varying vec2 vUv;",
+		"in vec2 vUv;",
 
 		"uniform sampler2D tColor;",
 		"uniform sampler2D tDepth;",
@@ -202,7 +202,7 @@ THREE.BokehShader = {
 
 
 			"for( int i=0; i<9; i++ ) {",
-				"float tmp = texture2D(tDepth, coords + offset[i]).r;",
+				"float tmp = texture(tDepth, coords + offset[i]).r;",
 				"d += tmp * kernel[i];",
 			"}",
 
@@ -216,9 +216,9 @@ THREE.BokehShader = {
 			"vec3 col = vec3(0.0);",
 			"vec2 texel = vec2(1.0/textureWidth,1.0/textureHeight);",
 
-			"col.r = texture2D(tColor,coords + vec2(0.0,1.0)*texel*fringe*blur).r;",
-			"col.g = texture2D(tColor,coords + vec2(-0.866,-0.5)*texel*fringe*blur).g;",
-			"col.b = texture2D(tColor,coords + vec2(0.866,-0.5)*texel*fringe*blur).b;",
+			"col.r = texture(tColor,coords + vec2(0.0,1.0)*texel*fringe*blur).r;",
+			"col.g = texture(tColor,coords + vec2(-0.866,-0.5)*texel*fringe*blur).g;",
+			"col.b = texture(tColor,coords + vec2(0.866,-0.5)*texel*fringe*blur).b;",
 
 			"vec3 lumcoeff = vec3(0.299,0.587,0.114);",
 			"float lum = dot(col.rgb, lumcoeff);",
@@ -264,7 +264,7 @@ THREE.BokehShader = {
 		"void main() {",
 			"//scene depth calculation",
 
-			"float depth = linearize(texture2D(tDepth,vUv.xy).x);",
+			"float depth = linearize(texture(tDepth,vUv.xy).x);",
 
 			"// Blur depth?",
 			"if (depthblur) {",
@@ -277,7 +277,7 @@ THREE.BokehShader = {
 
 			"if (shaderFocus) {",
 
-				"fDepth = linearize(texture2D(tDepth,focusCoords).x);",
+				"fDepth = linearize(texture(tDepth,focusCoords).x);",
 
 			"}",
 
@@ -319,9 +319,9 @@ THREE.BokehShader = {
 
 			"if(blur < 0.05) {",
 				"//some optimization thingy",
-				"col = texture2D(tColor, vUv.xy).rgb;",
+				"col = texture(tColor, vUv.xy).rgb;",
 			"} else {",
-				"col = texture2D(tColor, vUv.xy).rgb;",
+				"col = texture(tColor, vUv.xy).rgb;",
 				"float s = 1.0;",
 				"int ringsamples;",
 
@@ -347,8 +347,8 @@ THREE.BokehShader = {
 				"col *= vignette();",
 			"}",
 
-			"gl_FragColor.rgb = col;",
-			"gl_FragColor.a = 1.0;",
+			"colorOutput.rgb = col;",
+			"colorOutput.a = 1.0;",
 		"} "
 
 	].join( "\n" )

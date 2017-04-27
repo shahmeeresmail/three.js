@@ -31,7 +31,7 @@
 		<div id="container"></div>
 		<div id="info"><a href="http://threejs.org" target="_blank">threejs</a> - Inline Tone Mapping (within a Material's fragment shader) without<br/>using a pre-processing step or float/half buffers by <a href="http://clara.io/" target="_blank">Ben Houston</a>.</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 
 		<script src="js/Detector.js"></script>
@@ -192,7 +192,7 @@
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.shadowMap.enabled = true;
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				renderer.gammaInput = true;
 				renderer.gammaOutput = true;
@@ -285,7 +285,7 @@
 					composer.render();
 				}
 				else {
-					renderer.render( scene, camera );
+					effect.render( scene, camera ); //renderer.render( scene, camera );
 				}
 
 			}

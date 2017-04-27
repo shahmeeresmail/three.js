@@ -28,7 +28,7 @@
 		<a href="http://threejs.org" target="_blank">three.js</a> - ShadowMapViewer example by <a href="https://github.com/arya-s">arya-s</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 		<script src="js/shaders/UnpackDepthRGBAShader.js"></script>
 		<script src="js/utils/ShadowMapViewer.js"></script>
@@ -199,7 +199,7 @@
 
 			function renderScene() {
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

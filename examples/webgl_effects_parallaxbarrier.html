@@ -55,7 +55,7 @@
 			<div id="buttons_materials" class="bwrap"></div>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/effects/ParallaxBarrierEffect.js"></script>
 		<script src="js/loaders/BinaryLoader.js"></script>
@@ -192,7 +192,7 @@
 				renderer = new THREE.WebGLRenderer( { antialias: false } );
 				renderer.setFaceCulling( THREE.CullFaceNone );
 				renderer.setPixelRatio( window.devicePixelRatio );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				var width = window.innerWidth || 2;
 				var height = window.innerHeight || 2;

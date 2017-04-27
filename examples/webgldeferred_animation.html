@@ -37,7 +37,7 @@
 		<div id="container"></div>
 
 		<script src="js/libs/stats.min.js"></script>
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/Detector.js"></script>
 
 		<script src="js/shaders/CopyShader.js"></script>
@@ -87,7 +87,7 @@
 				stats.domElement.style.zIndex = 100;
 
 				var container = document.getElementById( 'container' );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 				container.appendChild( stats.domElement );
 
 				initKnight();
@@ -284,7 +284,7 @@
 				camera.position.y += ( - mouseY - camera.position.y ) * .05;
 				camera.lookAt( scene.position );
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

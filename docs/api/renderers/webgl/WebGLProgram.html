@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -17,6 +17,8 @@
 		<h3>Vertex shader (unconditional):</h3>
 		<div>
 		<code>
+        #version 300 es
+        #extension GL_OVR_multiview2 : enable
 		// = object.matrixWorld
 		uniform mat4 modelMatrix;
 
@@ -25,6 +27,7 @@
 
 		// = camera.projectionMatrix
 		uniform mat4 projectionMatrix;
+        uniform mat4 projectionMatrixR;
 
 		// = camera.matrixWorldInverse
 		uniform mat4 viewMatrix;
@@ -45,11 +48,11 @@
 		<p>
 		Note that you can therefore calculate the position of a vertex in the vertex shader by:
 		<code>
-		gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+		gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );
 		</code>
 		or alternatively
 		<code>
-		gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4( position, 1.0 );
+		gl_Position = GET_PROJECTION_MATRIX * viewMatrix * modelMatrix * vec4( position, 1.0 );
 		</code>
 		</p>
 		</div>

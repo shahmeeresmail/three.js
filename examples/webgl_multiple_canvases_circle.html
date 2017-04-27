@@ -303,7 +303,7 @@
 					renderer.setClearColor( 0xffffff );
 					renderer.setPixelRatio( window.devicePixelRatio );
 					renderer.setSize( container.clientWidth, container.clientHeight );
-					container.appendChild( renderer.domElement );
+					container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 					document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
@@ -330,7 +330,7 @@
 
 					virtualCamera.lookAt( scene.position );
 
-					renderer.render( scene, camera );
+					effect.render( scene, camera ); //renderer.render( scene, camera );
 
 				}
 

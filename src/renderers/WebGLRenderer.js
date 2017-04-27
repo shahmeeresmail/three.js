@@ -1747,7 +1747,8 @@ function WebGLRenderer( parameters ) {
 
 		if ( refreshProgram || camera !== _currentCamera ) {
 
-			p_uniforms.set( _gl, camera, 'projectionMatrix' );
+		    p_uniforms.set( _gl, camera, 'projectionMatrix' );
+		    p_uniforms.set( _gl, camera, 'projectionMatrixR' );
 
 			if ( capabilities.logarithmicDepthBuffer ) {
 

@@ -278,7 +278,7 @@ THREE.ShaderSkin = {
 
 				"vUv = uv * offsetRepeat.zw + offsetRepeat.xy;",
 
-				"gl_Position = projectionMatrix * mvPosition;",
+				"gl_Position = GET_PROJECTION_MATRIX * mvPosition;",
 
 				THREE.ShaderChunk[ "shadowmap_vertex" ],
 
@@ -589,11 +589,11 @@ THREE.ShaderSkin = {
 					"vec3 dv = texture2D( tDisplacement, uv ).xyz;",
 					"float df = uDisplacementScale * dv.x + uDisplacementBias;",
 					"vec4 displacedPosition = vec4( vNormal.xyz * df, 0.0 ) + mvPosition;",
-					"gl_Position = projectionMatrix * displacedPosition;",
+					"gl_Position = GET_PROJECTION_MATRIX * displacedPosition;",
 
 				"#else",
 
-					"gl_Position = projectionMatrix * mvPosition;",
+					"gl_Position = GET_PROJECTION_MATRIX * mvPosition;",
 
 				"#endif",
 
@@ -649,7 +649,7 @@ THREE.ShaderSkin = {
 			"void main() {",
 
 				"vUv = uv;",
-				"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+				"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 			"}"
 

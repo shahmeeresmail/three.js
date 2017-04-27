@@ -17,12 +17,12 @@ THREE.BleachBypassShader = {
 
 	vertexShader: [
 
-		"varying vec2 vUv;",
+		"out vec2 vUv;",
 
 		"void main() {",
 
 			"vUv = uv;",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 		"}"
 
@@ -34,11 +34,11 @@ THREE.BleachBypassShader = {
 
 		"uniform sampler2D tDiffuse;",
 
-		"varying vec2 vUv;",
+		"in vec2 vUv;",
 
 		"void main() {",
 
-			"vec4 base = texture2D( tDiffuse, vUv );",
+			"vec4 base = texture( tDiffuse, vUv );",
 
 			"vec3 lumCoeff = vec3( 0.25, 0.65, 0.1 );",
 			"float lum = dot( lumCoeff, base.rgb );",
@@ -55,7 +55,7 @@ THREE.BleachBypassShader = {
 			"vec3 mixRGB = A2 * newColor.rgb;",
 			"mixRGB += ( ( 1.0 - A2 ) * base.rgb );",
 
-			"gl_FragColor = vec4( mixRGB, base.a );",
+			"colorOutput = vec4( mixRGB, base.a );",
 
 		"}"
 

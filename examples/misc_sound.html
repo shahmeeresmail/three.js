@@ -42,7 +42,7 @@
 
 		<div id="container"></div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/controls/FirstPersonControls.js"></script>
 
@@ -210,7 +210,7 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 				container.innerHTML = "";
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				//
 				controls = new THREE.FirstPersonControls( camera, renderer.domElement );
@@ -255,7 +255,7 @@
 				material_sphere2.emissive.b = analyser2.getAverageFrequency() / 256;
 				material_sphere3.emissive.b = analyser3.getAverageFrequency() / 256;
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

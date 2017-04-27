@@ -32,7 +32,7 @@
 			<a href="http://threejs.org" target="_blank">three.js</a> - webgl - PVR compressed textures
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/loaders/PVRLoader.js"></script>
 
 		<script src="js/Detector.js"></script>
@@ -201,7 +201,7 @@
 
 				}
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 				stats.update();
 
 			}

@@ -35,7 +35,7 @@
 		<a href="http://www.nicovideo.jp/watch/sm19168559" target="_blank">Original Camera Data(I've customized this)</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/libs/charsetencoder.min.js"></script>
 		<script src="js/libs/ammo.js"></script>
@@ -94,7 +94,7 @@
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.setClearColor( new THREE.Color( 0xffffff ) );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				// model
 
@@ -203,7 +203,7 @@
 
 				} else {
 
-					renderer.render( scene, camera );
+					effect.render( scene, camera ); //renderer.render( scene, camera );
 
 				}
 

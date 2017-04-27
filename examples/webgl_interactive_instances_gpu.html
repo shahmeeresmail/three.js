@@ -134,7 +134,7 @@
 
 	<div id="container"></div>
 
-	<script src="../build/three.js"></script>
+	<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 	<script src="js/controls/TrackballControls.js"></script>
 	<script src="js/libs/stats.min.js"></script>
 
@@ -167,7 +167,7 @@
 				vPosition = positionEye;
 			#endif
 
-			gl_Position = projectionMatrix * vec4( positionEye, 1.0 );
+			gl_Position = GET_PROJECTION_MATRIX * vec4( positionEye, 1.0 );
 
 		}
 
@@ -244,7 +244,7 @@
 				vPosition = positionEye;
 			#endif
 
-			gl_Position = projectionMatrix * vec4( positionEye, 1.0 );
+			gl_Position = GET_PROJECTION_MATRIX * vec4( positionEye, 1.0 );
 
 		}
 
@@ -302,7 +302,7 @@
 				vPosition = positionEye;
 			#endif
 
-			gl_Position = projectionMatrix * vec4( positionEye, 1.0 );
+			gl_Position = GET_PROJECTION_MATRIX * vec4( positionEye, 1.0 );
 
 		}
 
@@ -929,7 +929,7 @@
 			renderer.setPixelRatio( window.devicePixelRatio );
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			renderer.sortObjects = false;
-			container.appendChild( renderer.domElement );
+			container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 			if ( renderer.extensions.get( 'ANGLE_instanced_arrays' ) === false ) {
 
@@ -1060,7 +1060,7 @@
 		function render() {
 
 			pick();
-			renderer.render( scene, camera );
+			effect.render( scene, camera ); //renderer.render( scene, camera );
 
 		}
 

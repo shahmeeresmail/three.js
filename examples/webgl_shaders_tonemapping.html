@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>three.js webgl - adaptive tone-mapping</title>
@@ -37,7 +37,7 @@
 			<div class="label" style="position: absolute;left: 80%;bottom: 5%;">Adaptive Tone Mapping</div>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/dat.gui.min.js"></script>
@@ -151,7 +151,7 @@
 							"	vNormal = normalize( transformedNormal );",
 							"vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
 							"vViewPosition = -mvPosition.xyz;",
-							"gl_Position = projectionMatrix * mvPosition;",
+							"gl_Position = GET_PROJECTION_MATRIX * mvPosition;",
 						"}"
 
 					].join("\n"),
@@ -259,7 +259,7 @@
 					"varying vec2 vUv;",
 					"void main() {",
 						"vUv = uv;",
-						"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+						"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 					"}"
 
 				].join("\n");
@@ -348,7 +348,7 @@
 				renderer.gammaInput = true;
 				renderer.gammaOutput = false;
 
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				// var width = window.innerWidth || 1;
 				var height = window.innerHeight || 1;

@@ -30,7 +30,7 @@
 
 		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> webgl - typed arrays - nearest neighbour for 500,000 sprites</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/TypedArrayUtils.js"></script>
 		<script src="js/controls/FirstPersonControls.js"></script>
 		<script type="x-shader/x-vertex" id="vertexshader">
@@ -49,7 +49,7 @@
 
 				gl_PointSize = 4.0 * ( 300.0 / -mvPosition.z );
 
-				gl_Position = projectionMatrix * mvPosition;
+				gl_Position = GET_PROJECTION_MATRIX * mvPosition;
 
 			}
 
@@ -191,7 +191,7 @@
 
 				controls.update( clock.getDelta() );
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

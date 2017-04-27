@@ -30,8 +30,8 @@ function ShaderMaterial( parameters ) {
 	this.defines = {};
 	this.uniforms = {};
 
-	this.vertexShader = 'void main() {\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n}';
-	this.fragmentShader = 'void main() {\n\tgl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );\n}';
+	this.vertexShader = 'void main() {\n\tgl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );\n}';
+	this.fragmentShader = 'void main() {\n\tcolorOutput = vec4( 1.0, 0.0, 0.0, 1.0 );\n}';
 
 	this.linewidth = 1;
 

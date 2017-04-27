@@ -32,7 +32,7 @@
 			robot from <a href="https://github.com/rdiankov/collada_robots" target="_blank">collada robots</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/libs/tween.min.js"></script>
 		<script src="js/loaders/ColladaLoader.js"></script>
@@ -129,7 +129,7 @@
 				renderer = new THREE.WebGLRenderer();
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );
@@ -215,7 +215,7 @@
 				particleLight.position.y = Math.cos( timer * 5 ) * 4000;
 				particleLight.position.z = Math.cos( timer * 4 ) * 3009;
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

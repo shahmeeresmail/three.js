@@ -39,7 +39,7 @@ Spiral sampling http://web.archive.org/web/20120421191837/http://www.cgafaq.info
 		</style>
 	</head>
 	<body>
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/shaders/SSAOShader.js"></script>
 		<script src="js/shaders/CopyShader.js"></script>
@@ -228,7 +228,7 @@ Spiral sampling http://web.archive.org/web/20120421191837/http://www.cgafaq.info
 
 				} else {
 
-					renderer.render( scene, camera );
+					effect.render( scene, camera ); //renderer.render( scene, camera );
 
 				}
 

@@ -34,7 +34,7 @@
 			<p>Texture by <a href="http://www.humus.name/index.php?page=Textures" target="_blank">Humus</a>
 		</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 
 		<script src="js/loaders/BinaryLoader.js"></script>
 
@@ -116,7 +116,7 @@
 				renderer = new THREE.WebGLRenderer();
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 				stats = new Stats();
 				container.appendChild( stats.dom );
@@ -197,7 +197,7 @@
 				pointLight.position.x = 1500 * Math.cos( timer );
 				pointLight.position.z = 1500 * Math.sin( timer );
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

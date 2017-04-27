@@ -28,7 +28,7 @@
 
 		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> - ConvexGeometry</div>
 
-		<script src="../build/three.js"></script>
+		<script>var useMultiviewExtension = true;</script><script src="../build/three.js"></script><script src="js/effects/StereoEffect.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 		<script src="js/geometries/ConvexGeometry.js"></script>
 		<script src="js/Detector.js"></script>
@@ -153,7 +153,7 @@
 
 			function render() {
 
-				renderer.render( scene, camera );
+				effect.render( scene, camera ); //renderer.render( scene, camera );
 
 			}
 

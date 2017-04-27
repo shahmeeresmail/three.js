@@ -476,7 +476,7 @@ var initSVGObject = function() {
 	function render() {
 
 		group.rotation.y += ( targetRotation - group.rotation.y ) * 0.05;
-		renderer.render( scene, camera );
+		effect.render( scene, camera ); //renderer.render( scene, camera );
 	}
 </script>
 
@@ -510,7 +510,7 @@ var initSVGObject = function() {
 
 	init3d();
 
-	container.appendChild( renderer.domElement );
+	container.appendChild( renderer.domElement ); effect = new THREE.StereoEffect(renderer); effect.setSize(window.innerWidth, window.innerHeight);
 
 	stats = new Stats();
 	container.appendChild( stats.dom );

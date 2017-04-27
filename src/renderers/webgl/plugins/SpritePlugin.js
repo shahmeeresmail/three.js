@@ -66,6 +66,7 @@ function SpritePlugin( renderer, sprites ) {
 
 			modelViewMatrix: 	gl.getUniformLocation( program, 'modelViewMatrix' ),
 			projectionMatrix:	gl.getUniformLocation( program, 'projectionMatrix' ),
+			projectionMatrixR:	gl.getUniformLocation( program, 'projectionMatrixR' ),
 
 			fogType:			gl.getUniformLocation( program, 'fogType' ),
 			fogDensity:			gl.getUniformLocation( program, 'fogDensity' ),
@@ -257,11 +258,13 @@ function SpritePlugin( renderer, sprites ) {
 		var fragmentShader = gl.createShader( gl.FRAGMENT_SHADER );
 
 		gl.shaderSource( vertexShader, [
-
+            '#version 300 es',
+            (useMultiviewExtension == true) ? '#extension GL_OVR_multiview2 : require' : '',
 			'precision ' + renderer.getPrecision() + ' float;',
 
 			'uniform mat4 modelViewMatrix;',
 			'uniform mat4 projectionMatrix;',
+            'uniform mat4 projectionMatrixR;',
 			'uniform float rotation;',
 			'uniform vec2 scale;',
 			'uniform vec2 uvOffset;',
@@ -286,7 +289,7 @@ function SpritePlugin( renderer, sprites ) {
 
 				'finalPosition = modelViewMatrix * vec4( 0.0, 0.0, 0.0, 1.0 );',
 				'finalPosition.xy += rotatedPosition;',
-				'finalPosition = projectionMatrix * finalPosition;',
+				'finalPosition = GET_PROJECTION_MATRIX * finalPosition;',
 
 				'gl_Position = finalPosition;',
 
@@ -295,7 +298,7 @@ function SpritePlugin( renderer, sprites ) {
 		].join( '\n' ) );
 
 		gl.shaderSource( fragmentShader, [
-
+            '#version 300 es',
 			'precision ' + renderer.getPrecision() + ' float;',
 
 			'uniform vec3 color;',

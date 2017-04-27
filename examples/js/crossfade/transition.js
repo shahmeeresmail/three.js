@@ -38,7 +38,7 @@ function Transition ( sceneA, sceneB ) {
 			"void main() {",
 
 			"vUv = vec2( uv.x, uv.y );",
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+			"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 
 			"}"
 

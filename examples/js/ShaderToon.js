@@ -41,7 +41,7 @@ THREE.ShaderToon = {
 				"vec3 I = worldPosition.xyz - cameraPosition;",
 				"vRefract = refract( normalize( I ), worldNormal, 1.02 );",
 
-				"gl_Position = projectionMatrix * mvPosition;",
+				"gl_Position = GET_PROJECTION_MATRIX * mvPosition;",
 
 			"}"
 
@@ -111,7 +111,7 @@ THREE.ShaderToon = {
 
 			"void main() {",
 
-				"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+				"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 				"vNormal = normalize( normalMatrix * normal );",
 
 			"}"
@@ -181,7 +181,7 @@ THREE.ShaderToon = {
 
 			"void main() {",
 
-				"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+				"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 				"vNormal = normalize( normalMatrix * normal );",
 
 			"}"
@@ -273,7 +273,7 @@ THREE.ShaderToon = {
 
 			"void main() {",
 
-				"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+				"gl_Position = GET_PROJECTION_MATRIX * modelViewMatrix * vec4( position, 1.0 );",
 				"vNormal = normalize( normalMatrix * normal );",
 
 			"}"
